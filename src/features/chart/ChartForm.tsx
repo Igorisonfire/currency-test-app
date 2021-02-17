@@ -40,19 +40,16 @@ export function ChartForm() {
     return (
         <form className={'chart-form'}>
             <Input
-                colour={'max'}
                 name={'Max'}
                 type={'number'}
                 value={maxInput.value}
                 onChange={maxInput.onChange}/>
             <Input
-                colour={'avg'}
                 name={'Avg'}
                 type={'number'}
                 value={avgInput.value}
                 onChange={avgInput.onChange}/>
             <Input
-                colour={'min'}
                 name={'Min'}
                 type={'number'}
                 value={minInput.value}

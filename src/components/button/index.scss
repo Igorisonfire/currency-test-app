@@ -2,7 +2,7 @@
 
 .button-component{
   &>span{
-    color: $purple-5;
+    color: $primary-5;
     font-weight: 600;
     font-size: 15px;
     line-height: 16px;
@@ -13,8 +13,8 @@
   padding: 14px 12px;
   text-align: center;
   border-radius: 6px;
-  background: $purple;
-  border: 1px solid $purple;
+  background: $primary;
+  border: 1px solid $primary;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -49,13 +49,13 @@
   @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
   &:hover{
-    background: $purple-85;
-    border: 1px solid $purple-85;
+    background: $primary-2;
+    border: 1px solid $primary-2;
   }
 
   &.disabled{
     &>span{
-      color: $dark-40;
+      color: $dark;
     }
     border-color: $dark-5;
     background: $dark-5;

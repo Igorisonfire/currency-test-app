@@ -27,6 +27,10 @@
     font-size: 14px;
   }
 
+  .react-datepicker__header {
+    background-color: $primary-5;
+  }
+
   .react-datepicker-popper {
     z-index: 1000;
     transform: translate(0) !important;
@@ -43,7 +47,7 @@
     font-size: 12px;
     line-height: 18px;
     letter-spacing: -0.3px;
-    color: #595E8D;
+    color: $dark;
     text-transform: uppercase;
     width: 24px;
     height: 24px;
@@ -71,13 +75,13 @@
   }
 
   .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected {
-    background: $purple;
+    background: $primary;
   }
   .react-datepicker__day--selected {
-    background: $purple;
+    background: $primary;
 
     &:hover {
-      background: $purple-70 !important;
+      background: $primary-2 !important;
     }
   }
 }

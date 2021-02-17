@@ -3,7 +3,6 @@ import "./index.scss";
 import {useState} from 'react'
 
 interface IProps {
-  colour?: string
   type?: string,
   name: string,
   value: string;
@@ -12,10 +11,9 @@ interface IProps {
 
 export const Input = (props: IProps) => {
 
-  const {colour, type, onChange, value, name} = props
+  const {type, onChange, value, name} = props
   const className = [
     'input-component',
-    colour
   ].join(' ').trim()
 
   return(
