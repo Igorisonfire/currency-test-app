@@ -1,0 +1,35 @@
+@import "../../styles/colors";
+
+.input-component{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &>input{
+    padding: 6px;
+    border-color: $dark;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    border-radius: 6px;
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  &>label{
+    padding-bottom: 6px;
+    font-size: 14px;
+  }
+
+  &.min > input{
+    border-color: $min;
+  }
+  &.avg > input{
+    border-color: $avg;
+  }
+  &.max > input{
+    border-color: $max;
+  }
+}

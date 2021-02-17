@@ -1,0 +1,83 @@
+@import "../../styles/colors";
+
+.datepicker-custom-component {
+  * {
+    outline: none !important;
+  }
+
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+
+  input{
+    padding: 6px;
+    border-color: $dark;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: none;
+    border-radius: 6px;
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  &>label{
+    padding-bottom: 6px;
+    font-size: 14px;
+  }
+
+  .react-datepicker-popper {
+    z-index: 1000;
+    transform: translate(0) !important;
+    width: 100%;
+  }
+
+  .react-datepicker__day-names {
+    display: flex;
+    padding: 0;
+    justify-content: space-between;
+  }
+
+  .react-datepicker__day-name {
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+    color: #595E8D;
+    text-transform: uppercase;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-datepicker__month {
+    margin: 0
+  }
+
+  .react-datepicker__week {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .react-datepicker__day, .react-datepicker__month-text, .react-datepicker__quarter-text {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected {
+    background: $purple;
+  }
+  .react-datepicker__day--selected {
+    background: $purple;
+
+    &:hover {
+      background: $purple-70 !important;
+    }
+  }
+}
