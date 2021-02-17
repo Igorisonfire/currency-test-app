@@ -1,0 +1,15 @@
+//example
+// @include box-shadow(3);
+
+@mixin box-shadow ($level) {
+
+  @if $level == 1 {
+    box-shadow: 1px 1px 8px rgba(0, 7, 43, 0.04);
+  } @else if $level == 2 {
+    box-shadow: 4px 8px 24px rgba(0, 7, 43, 0.04);
+  } @else if $level == 3 {
+    box-shadow: 8px 24px 48px rgba(0, 7, 43, 0.08);
+  } @else if $level == 4 {
+    box-shadow: 40px 40px 96px rgba(0, 7, 43, 0.08);
+  }
+}

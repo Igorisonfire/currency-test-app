@@ -1,4 +1,6 @@
 @import "styles/colors";
+@import "styles/transitions";
+@import "styles/shadows";
 
 @font-face {
   font-family: 'Roboto';
@@ -28,4 +30,46 @@
   font-family: 'Roboto', sans-serif;
   color: $dark;
   text-decoration: none;
+}
+
+h1{
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+h2{
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+}
+
+h3{
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+p{
+  color: $dark;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+input{
+  font-size: 16px;
+  line-height: 2px;
+}
+
+.regular{
+  font-weight: 400;
+}
+.medium{
+  font-weight: 500;
+}
+.semibold{
+  font-weight: 600;
+}
+.bold{
+  font-weight: 700;
 }
