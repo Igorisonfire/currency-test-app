@@ -1,10 +1,8 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import chartReducer from '../features/chart/chartSlice';
 import currencyReducer from '../app/slices/currencySlice';
 
 export const store = configureStore({
   reducer: {
-    chart: chartReducer,
     currency: currencyReducer
   },
 });

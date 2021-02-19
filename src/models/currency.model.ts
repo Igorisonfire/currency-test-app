@@ -27,6 +27,11 @@ namespace ICurrency {
         eurValue: string
         chfValue: string
     }
+
+    export interface ChartDataSegment {
+        date: string,
+        value: number
+    }
 }
 
 export default ICurrency;

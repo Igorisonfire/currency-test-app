@@ -5,21 +5,23 @@ import {CurrencyAPI} from '../../api/currency.api'
 import {dateToString} from '../../helpers/dateToString'
 import {sortDataByDate} from '../../helpers/sortDataByDate'
 import {CURRENCY_NAME} from '../../const/currency.const'
-import {useSelector} from 'react-redux'
 import {transformCurrencyValue} from '../../helpers/transformCurrencyValue'
+import {sortDataToChart} from '../../helpers/sortDataToChart'
 
 export interface ICurrencyState {
   data: ICurrency.ModelLocal[];
   currentDate: string
   currentQuotes: ICurrency.Quotes | null
-  convertedValues: ICurrency.ConvertedValues | null
+  convertedValues: ICurrency.ConvertedValues | null,
+  chartData: ICurrency.ChartDataSegment[]
 }
 
 const initialState: ICurrencyState = {
   data: [],
-  currentDate: '',
+  currentDate: dateToString(new Date()),
   currentQuotes: null,
-  convertedValues: null
+  convertedValues: null,
+  chartData: []
 };
 
 export const currencySlice = createSlice({
@@ -105,11 +107,26 @@ export const currencySlice = createSlice({
         ...state,
         convertedValues
       }
-    }
+    },
+    setChartData: (state: ICurrencyState, action: PayloadAction<string>) => {
+      const ratesName = action.payload
+      const chartData = sortDataToChart(state.data, ratesName)
+
+      return {
+        ...state,
+        chartData
+      }
+    },
   },
 });
 
-export const { setDataSegment, setDataArray, setCurrentQuotes, setConvertValues } = currencySlice.actions;
+export const {
+  setDataSegment,
+  setDataArray,
+  setCurrentQuotes,
+  setConvertValues,
+  setChartData
+} = currencySlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -119,10 +136,10 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
   const localCurrencyData = localStorage.getItem('localCurrencyData')
   const localCurrencyDataArray = localCurrencyData ? JSON.parse(localCurrencyData) : []
 
-  dispatch(setDataArray(localCurrencyDataArray))
+  localCurrencyDataArray.length && dispatch(setDataArray(localCurrencyDataArray))
   const stateData = getState().currency.data
 
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 2; i++) {
     let date = new Date();
     date.setDate(date.getDate() - i);
 
@@ -138,7 +155,9 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
     }
   }
 
+  dispatch(setCurrentQuotes({quotes: getState().currency.data[0].quotes, date: getState().currency.data[0].date}))
   dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
+  dispatch(setChartData('EURUSD'))
 
   localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));
 }

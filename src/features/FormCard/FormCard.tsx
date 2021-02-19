@@ -28,7 +28,7 @@ export function FormCard() {
 
     return (
         <form className={'form-card'}>
-            <h2>Form</h2>
+            <h2>Converter</h2>
             <div className={'input-plus-image'}>
                 <DatePickerComponent
                     name={'Date'}
@@ -38,33 +38,33 @@ export function FormCard() {
             </div>
 
             {convertedValues && <>
-            <div className={'input-plus-image'}>
-                <Input
-                    id={CURRENCY_NAME.USD}
-                    name={CURRENCY_NAME.USD}
-                    type={'number'}
-                    value={convertedValues.usdValue}
-                    onChange={onChangeInput}/>
-                <img src={USImage} alt='US'/>
-            </div>
-            <div className={'input-plus-image'}>
-                <Input
-                    id={CURRENCY_NAME.EUR}
-                    name={CURRENCY_NAME.EUR}
-                    type={'number'}
-                    value={convertedValues.eurValue}
-                    onChange={onChangeInput}/>
-                <img src={EUImage} alt='EU'/>
-            </div>
-            <div className={'input-plus-image'}>
-                <Input
-                    id={CURRENCY_NAME.CHF}
-                    name={CURRENCY_NAME.CHF}
-                    type={'number'}
-                    value={convertedValues.chfValue}
-                    onChange={onChangeInput}/>
-                <img src={SwitzerlandImage} alt='Switzerland'/>
-            </div>
+                <div className={'input-plus-image'}>
+                    <Input
+                        id={CURRENCY_NAME.USD}
+                        name={CURRENCY_NAME.USD}
+                        type={'number'}
+                        value={convertedValues.usdValue}
+                        onChange={onChangeInput}/>
+                    <img src={USImage} alt='US'/>
+                </div>
+                <div className={'input-plus-image'}>
+                    <Input
+                        id={CURRENCY_NAME.EUR}
+                        name={CURRENCY_NAME.EUR}
+                        type={'number'}
+                        value={convertedValues.eurValue}
+                        onChange={onChangeInput}/>
+                    <img src={EUImage} alt='EU'/>
+                </div>
+                <div className={'input-plus-image'}>
+                    <Input
+                        id={CURRENCY_NAME.CHF}
+                        name={CURRENCY_NAME.CHF}
+                        type={'number'}
+                        value={convertedValues.chfValue}
+                        onChange={onChangeInput}/>
+                    <img src={SwitzerlandImage} alt='Switzerland'/>
+                </div>
             </>}
         </form>
     );
