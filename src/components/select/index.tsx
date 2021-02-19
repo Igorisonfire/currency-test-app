@@ -7,7 +7,6 @@ interface IProps {
     value: ISelectOption | null
     onChange(value: ValueType<ISelectOption, boolean>, id: string): void
     options: ISelectOption[],
-    disabledOption?: ISelectOption
 }
 
 export interface ISelectOption {
@@ -16,7 +15,7 @@ export interface ISelectOption {
 }
 
 export const SelectComponent = (props: IProps) => {
-    const {onChange, value, id, options, disabledOption} = props
+    const {onChange, value, id, options} = props
 
     const onChangeSelect = (value: ValueType<ISelectOption, boolean>) => {
         onChange && onChange(value, id)

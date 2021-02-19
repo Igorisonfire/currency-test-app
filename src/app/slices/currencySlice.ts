@@ -5,7 +5,6 @@ import {CurrencyAPI} from '../../api/currency.api'
 import {dateToString} from '../../helpers/dateToString'
 import {sortDataByDate} from '../../helpers/sortDataByDate'
 import {CURRENCY_NAME, CURRENCY_OPTION, SELECT_POSITION} from '../../const/currency.const'
-import {transformCurrencyValue} from '../../helpers/transformCurrencyValue'
 import {sortDataToChart} from '../../helpers/sortDataToChart'
 import {ISelectOption} from '../../components/select'
 import {transformChartGroup} from '../../helpers/transformChartGroup'
@@ -85,7 +84,7 @@ export const currencySlice = createSlice({
         convertedValues
       }
     },
-    setChartData: (state: ICurrencyState) => {
+    updateChartData: (state: ICurrencyState) => {
       const selectedChartGroup = state.selectedChartGroup
       const firstValue = selectedChartGroup && selectedChartGroup.firs ? selectedChartGroup.firs.value : ''
       const secondValue = selectedChartGroup && selectedChartGroup.second ? selectedChartGroup.second.value : ''
@@ -115,7 +114,7 @@ export const {
   setDataArray,
   setCurrentQuotes,
   setConvertValues,
-  setChartData,
+  updateChartData,
   setSelectedChartGroup
 } = currencySlice.actions;
 
@@ -153,7 +152,7 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
   dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
   dispatch(setSelectedChartGroup({option: CURRENCY_OPTION.USD, position: SELECT_POSITION.FIRST}))
   dispatch(setSelectedChartGroup({option: CURRENCY_OPTION.EUR, position: SELECT_POSITION.SECOND}))
-  dispatch(setChartData())
+  dispatch(updateChartData())
 
   //set updated data to localstorage
   localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));

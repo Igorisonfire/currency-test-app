@@ -82,10 +82,10 @@
   }
 
   .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected {
-    background: $primary-2;
+    background: $primary;
   }
   .react-datepicker__day--selected {
-    background: $primary-2;
+    background: $primary;
 
     &:hover {
       background: $primary-3 !important;

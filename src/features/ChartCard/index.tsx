@@ -3,7 +3,7 @@ import './index.scss';
 import {ISelectOption, SelectComponent} from '../../components/select'
 import {CURRENCY_OPTIONS, SELECT_POSITION} from '../../const/currency.const'
 import {useDispatch, useSelector} from 'react-redux'
-import {selectCurrencyState, setChartData, setSelectedChartGroup} from '../../app/slices/currencySlice'
+import {selectCurrencyState, updateChartData, setSelectedChartGroup} from '../../app/slices/currencySlice'
 
 export function ChartCard() {
     const dispatch = useDispatch()
@@ -13,9 +13,8 @@ export function ChartCard() {
     const onChangeSelect = (value: ISelectOption, id: string) => {
         const selectedData = {option: value, position: id}
         dispatch(setSelectedChartGroup(selectedData))
-        dispatch(setChartData())
+        dispatch(updateChartData())
     }
-
 
     return (
         <div className={'chart-card'}>
