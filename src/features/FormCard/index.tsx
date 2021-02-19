@@ -1,5 +1,5 @@
 import React from 'react';
-import './FormCard.scss';
+import './index.scss';
 import {useDispatch, useSelector} from 'react-redux'
 import {getCurrentData, selectCurrencyState, setConvertValues} from '../../app/slices/currencySlice'
 import {Input} from '../../components/input'
@@ -36,13 +36,12 @@ export function FormCard() {
                     onChange={onChangeDate}/>
                 <img src={CalendarImage} alt='calendar'/>
             </div>
-
-            {convertedValues && <>
+            <hr/>
+            {convertedValues && <div className={'inputs-layout'}>
                 <div className={'input-plus-image'}>
                     <Input
                         id={CURRENCY_NAME.USD}
                         name={CURRENCY_NAME.USD}
-                        type={'number'}
                         value={convertedValues.usdValue}
                         onChange={onChangeInput}/>
                     <img src={USImage} alt='US'/>
@@ -51,7 +50,6 @@ export function FormCard() {
                     <Input
                         id={CURRENCY_NAME.EUR}
                         name={CURRENCY_NAME.EUR}
-                        type={'number'}
                         value={convertedValues.eurValue}
                         onChange={onChangeInput}/>
                     <img src={EUImage} alt='EU'/>
@@ -60,12 +58,11 @@ export function FormCard() {
                     <Input
                         id={CURRENCY_NAME.CHF}
                         name={CURRENCY_NAME.CHF}
-                        type={'number'}
                         value={convertedValues.chfValue}
                         onChange={onChangeInput}/>
                     <img src={SwitzerlandImage} alt='Switzerland'/>
                 </div>
-            </>}
+            </div>}
         </form>
     );
 }

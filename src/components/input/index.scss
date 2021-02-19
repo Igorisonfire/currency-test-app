@@ -6,8 +6,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 
   &>input{
+    width: 100%;
     padding: 6px;
     border-color: $dark-5;
     border-width: 2px;

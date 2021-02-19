@@ -4,7 +4,6 @@ import {useState} from 'react'
 
 interface IProps {
   id?: string,
-  type?: string,
   name: string,
   value: string;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
@@ -12,7 +11,7 @@ interface IProps {
 
 export const Input = (props: IProps) => {
 
-  const {id, type, onChange, value, name} = props
+  const {id, onChange, value, name} = props
   const className = [
     'input-component',
   ].join(' ').trim()

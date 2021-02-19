@@ -1,0 +1,27 @@
+.dashboard-wrapper{
+  display: flex;
+  flex-direction: column;
+
+  &>h1{
+    padding-top: 48px;
+  }
+
+  &>*:not(:last-child){
+    margin-bottom: 24px;
+  }
+
+  .dashboard-grid{
+    display: grid;
+    grid-gap: 24px;
+
+    grid-template-areas:
+      "converter chart chart chart";
+
+
+    @media (max-width: 1024px) {
+      grid-template-areas:
+      "converter"
+      "chart";
+    }
+  }
+}
