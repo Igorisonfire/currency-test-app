@@ -1,0 +1,17 @@
+@import "../../styles/colors";
+@import "../../styles/shadows";
+@import "../../styles/transitions";
+
+.select-component{
+  font-weight: 500;
+
+  .custom__control{
+    border-width: 2px;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .custom__option{
+    cursor: pointer;
+  }
+}

@@ -16,11 +16,19 @@
     border-style: solid;
     box-shadow: none;
     border-radius: 6px;
+    @include transition-1;
+
+    &:hover{
+      outline: none;
+      border-color: $dark-4;
+      @include transition-1
+    }
 
     &:focus{
       outline: none;
-      border-color: $dark-4;
-      @include box-shadow(3)
+      border-color: $primary;
+      @include box-shadow(3);
+      @include transition-1;
     }
   }
 

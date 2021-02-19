@@ -4,9 +4,12 @@ import ICurrency from '../../models/currency.model'
 import {CurrencyAPI} from '../../api/currency.api'
 import {dateToString} from '../../helpers/dateToString'
 import {sortDataByDate} from '../../helpers/sortDataByDate'
-import {CURRENCY_NAME} from '../../const/currency.const'
+import {CURRENCY_NAME, CURRENCY_OPTION, SELECT_POSITION} from '../../const/currency.const'
 import {transformCurrencyValue} from '../../helpers/transformCurrencyValue'
 import {sortDataToChart} from '../../helpers/sortDataToChart'
+import {ISelectOption} from '../../components/select'
+import {transformChartGroup} from '../../helpers/transformChartGroup'
+import {convertCurrencyValues} from '../../helpers/convertCurrencyValues'
 
 export interface ICurrencyState {
   data: ICurrency.ModelLocal[];
@@ -14,6 +17,7 @@ export interface ICurrencyState {
   currentQuotes: ICurrency.Quotes | null
   convertedValues: ICurrency.ConvertedValues | null,
   chartData: ICurrency.ChartDataSegment[]
+  selectedChartGroup: ICurrency.SelectedChartGroup | null
 }
 
 const initialState: ICurrencyState = {
@@ -21,7 +25,8 @@ const initialState: ICurrencyState = {
   currentDate: dateToString(new Date()),
   currentQuotes: null,
   convertedValues: null,
-  chartData: []
+  chartData: [],
+  selectedChartGroup: null
 };
 
 export const currencySlice = createSlice({
@@ -73,48 +78,33 @@ export const currencySlice = createSlice({
 
       if (!quotes) return
 
-      const EURCHF = +(quotes.USDCHF / quotes.USDEUR).toFixed(6)
-
-      switch (currencyName) {
-        case CURRENCY_NAME.USD: {
-          convertedValues = {
-            usdValue: value,
-            eurValue: transformCurrencyValue(+value * quotes.USDEUR),
-            chfValue: transformCurrencyValue(+value * quotes.USDCHF)
-          }
-          break
-        }
-        case CURRENCY_NAME.EUR: {
-          convertedValues = {
-            usdValue: transformCurrencyValue(+value / quotes.USDEUR),
-            eurValue: value,
-            chfValue: transformCurrencyValue(+value * EURCHF)
-          }
-          break
-        }
-        case CURRENCY_NAME.CHF: {
-          convertedValues = {
-            usdValue: transformCurrencyValue(+value / quotes.USDCHF),
-            eurValue: transformCurrencyValue(+value / EURCHF),
-            chfValue: value
-          }
-          break
-        }
-        default: break
-      }
+      convertedValues = convertCurrencyValues(quotes, value, currencyName)
 
       return {
         ...state,
         convertedValues
       }
     },
-    setChartData: (state: ICurrencyState, action: PayloadAction<string>) => {
-      const ratesName = action.payload
+    setChartData: (state: ICurrencyState) => {
+      const selectedChartGroup = state.selectedChartGroup
+      const firstValue = selectedChartGroup && selectedChartGroup.firs ? selectedChartGroup.firs.value : ''
+      const secondValue = selectedChartGroup && selectedChartGroup.second ? selectedChartGroup.second.value : ''
+      const ratesName = firstValue + secondValue
       const chartData = sortDataToChart(state.data, ratesName)
 
       return {
         ...state,
         chartData
+      }
+    },
+    setSelectedChartGroup: (state: ICurrencyState, action: PayloadAction<{option: ISelectOption, position: string}>) => {
+      const option = action.payload.option
+      const position = action.payload.position
+      let selectedChartGroup = transformChartGroup(state.selectedChartGroup, option, position)
+
+      return {
+        ...state,
+        selectedChartGroup
       }
     },
   },
@@ -125,7 +115,8 @@ export const {
   setDataArray,
   setCurrentQuotes,
   setConvertValues,
-  setChartData
+  setChartData,
+  setSelectedChartGroup
 } = currencySlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -160,7 +151,9 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
   //start initialization
   dispatch(setCurrentQuotes({quotes: getState().currency.data[0].quotes, date: getState().currency.data[0].date}))
   dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
-  dispatch(setChartData('EURUSD'))
+  dispatch(setSelectedChartGroup({option: CURRENCY_OPTION.USD, position: SELECT_POSITION.FIRST}))
+  dispatch(setSelectedChartGroup({option: CURRENCY_OPTION.EUR, position: SELECT_POSITION.SECOND}))
+  dispatch(setChartData())
 
   //set updated data to localstorage
   localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));

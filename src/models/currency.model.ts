@@ -1,3 +1,5 @@
+import {ISelectOption} from '../components/select'
+
 namespace ICurrency {
     export interface ModelApi {
         date: string
@@ -31,6 +33,11 @@ namespace ICurrency {
     export interface ChartDataSegment {
         date: string,
         value: number
+    }
+
+    export interface SelectedChartGroup {
+        firs: ISelectOption | null,
+        second: ISelectOption | null
     }
 }
 

@@ -17,7 +17,7 @@ export function Dashboard() {
 
     return (
         <div className={'dashboard-wrapper global-container'}>
-            <h1>Dashboard</h1>
+            <h1>Currency Dashboard</h1>
             <div className={'dashboard-grid'}>
                 {currencyState && currencyState.data.length && <FormCard/>}
                 <ChartCard grid-area={'chart'}/>
