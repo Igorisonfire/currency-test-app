@@ -24,7 +24,7 @@ export function ChartCard() {
                     <SelectComponent
                         options={CURRENCY_OPTIONS}
                         id={SELECT_POSITION.FIRST}
-                        value={selectedChartGroup.firs}
+                        value={selectedChartGroup.first}
                         onChange={onChangeSelect}/>
                     <SelectComponent
                         options={CURRENCY_OPTIONS}

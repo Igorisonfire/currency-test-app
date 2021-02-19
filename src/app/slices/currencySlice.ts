@@ -86,7 +86,7 @@ export const currencySlice = createSlice({
     },
     updateChartData: (state: ICurrencyState) => {
       const selectedChartGroup = state.selectedChartGroup
-      const firstValue = selectedChartGroup && selectedChartGroup.firs ? selectedChartGroup.firs.value : ''
+      const firstValue = selectedChartGroup && selectedChartGroup.first ? selectedChartGroup.first.value : ''
       const secondValue = selectedChartGroup && selectedChartGroup.second ? selectedChartGroup.second.value : ''
       const ratesName = firstValue + secondValue
       const chartData = sortDataToChart(state.data, ratesName)

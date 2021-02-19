@@ -1,6 +1,6 @@
 import ICurrency from '../models/currency.model'
 import {ISelectOption} from '../components/select'
-import {CURRENCY_OPTIONS, SELECT_POSITION} from '../const/currency.const'
+import {SELECT_POSITION} from '../const/currency.const'
 
 export const transformChartGroup = (initialSelectedChartGroup: ICurrency.SelectedChartGroup | null, option: ISelectOption, position: string) => {
     let selectedChartGroup = initialSelectedChartGroup
@@ -9,26 +9,26 @@ export const transformChartGroup = (initialSelectedChartGroup: ICurrency.Selecte
         case SELECT_POSITION.FIRST: {
             if (selectedChartGroup && selectedChartGroup.second && selectedChartGroup.second.value === option.value) {
                 selectedChartGroup = {
-                    firs: option,
-                    second: CURRENCY_OPTIONS.filter((item: ISelectOption) => item.value !== option.value)[0]
+                    first: option,
+                    second: selectedChartGroup.first
                 }
             } else {
                 selectedChartGroup = {
-                    firs: option,
+                    first: option,
                     second: selectedChartGroup ? selectedChartGroup.second : null
                 }
             }
             break
         }
         case SELECT_POSITION.SECOND: {
-            if (selectedChartGroup && selectedChartGroup.firs && selectedChartGroup.firs.value === option.value) {
+            if (selectedChartGroup && selectedChartGroup.first && selectedChartGroup.first.value === option.value) {
                 selectedChartGroup = {
-                    firs: CURRENCY_OPTIONS.filter((item: ISelectOption) => item.value !== option.value)[0],
+                    first: selectedChartGroup.second,
                     second: option
                 }
             } else {
                 selectedChartGroup = {
-                    firs: selectedChartGroup ? selectedChartGroup.firs : null,
+                    first: selectedChartGroup ? selectedChartGroup.first : null,
                     second: option
                 }
             }

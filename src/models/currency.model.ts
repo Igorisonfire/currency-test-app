@@ -36,7 +36,7 @@ namespace ICurrency {
     }
 
     export interface SelectedChartGroup {
-        firs: ISelectOption | null,
+        first: ISelectOption | null,
         second: ISelectOption | null
     }
 }
