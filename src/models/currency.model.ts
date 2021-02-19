@@ -12,7 +12,7 @@ namespace ICurrency {
 
     export interface ModelLocal {
         date: string,
-        quotes: NewQuotes,
+        quotes: Quotes,
         timestamp: number
     }
 
@@ -22,10 +22,10 @@ namespace ICurrency {
         USDCHF: number
     }
 
-    export interface NewQuotes {
-        USDEUR: number,
-        USDCHF: number,
-        EURCHF: number,
+    export interface ConvertedValues {
+        usdValue: string
+        eurValue: string
+        chfValue: string
     }
 }
 

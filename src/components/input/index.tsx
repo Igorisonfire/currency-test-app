@@ -3,6 +3,7 @@ import "./index.scss";
 import {useState} from 'react'
 
 interface IProps {
+  id?: string,
   type?: string,
   name: string,
   value: string;
@@ -11,7 +12,7 @@ interface IProps {
 
 export const Input = (props: IProps) => {
 
-  const {type, onChange, value, name} = props
+  const {id, type, onChange, value, name} = props
   const className = [
     'input-component',
   ].join(' ').trim()
@@ -19,7 +20,7 @@ export const Input = (props: IProps) => {
   return(
       <div className={className}>
         <label>{name}</label>
-        <input type={type} value={value} onChange={onChange}/>
+        <input id={id} type={'text'} value={value} onChange={onChange}/>
       </div>
   )
 }

@@ -18,9 +18,12 @@ export const DatePickerComponent = (props: IProps) => {
         <div className={'datepicker-custom-component'}>
             <label>{name}</label>
             <DatePicker
+                dateFormat={"dd.MM.yyyy"}
+                popperPlacement={'auto'}
                 selected={selected}
                 onChange={onChange}
-                minDate={new Date()}
+                onChangeRaw={(e) => {e.preventDefault()}}
+                maxDate={new Date()}
             />
         </div>
     )

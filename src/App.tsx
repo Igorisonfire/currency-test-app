@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import {Dashboard} from './features/dashboard/Dashboard'
+import {Dashboard} from './features/Dashboard/Dashboard'
 
 function App() {
     return (

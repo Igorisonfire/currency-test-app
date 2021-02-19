@@ -1,4 +1,6 @@
 @import "../../styles/colors";
+@import "../../styles/shadows";
+@import "../../styles/transitions";
 
 .input-component{
   display: flex;
@@ -7,18 +9,21 @@
 
   &>input{
     padding: 6px;
-    border-color: $dark;
-    border-width: 1px;
+    border-color: $dark-5;
+    border-width: 2px;
     border-style: solid;
     box-shadow: none;
     border-radius: 6px;
 
     &:focus{
       outline: none;
+      border-color: $dark-4;
+      @include box-shadow(3)
     }
   }
 
   &>label{
+    font-weight: 500;
     padding-bottom: 6px;
     font-size: 14px;
   }

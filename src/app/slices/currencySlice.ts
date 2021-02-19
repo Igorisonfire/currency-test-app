@@ -4,13 +4,22 @@ import ICurrency from '../../models/currency.model'
 import {CurrencyAPI} from '../../api/currency.api'
 import {dateToString} from '../../helpers/dateToString'
 import {sortDataByDate} from '../../helpers/sortDataByDate'
+import {CURRENCY_NAME} from '../../const/currency.const'
+import {useSelector} from 'react-redux'
+import {transformCurrencyValue} from '../../helpers/transformCurrencyValue'
 
 export interface ICurrencyState {
   data: ICurrency.ModelLocal[];
+  currentDate: string
+  currentQuotes: ICurrency.Quotes | null
+  convertedValues: ICurrency.ConvertedValues | null
 }
 
 const initialState: ICurrencyState = {
   data: [],
+  currentDate: '',
+  currentQuotes: null,
+  convertedValues: null
 };
 
 export const currencySlice = createSlice({
@@ -18,15 +27,9 @@ export const currencySlice = createSlice({
   initialState,
   reducers: {
     setDataSegment: (state: ICurrencyState, action: PayloadAction<ICurrency.ModelApi>) => {
-      const newQuotes: ICurrency.NewQuotes = {
-        USDEUR: action.payload.quotes.USDEUR,
-        USDCHF: action.payload.quotes.USDCHF,
-        EURCHF: +(action.payload.quotes.USDCHF / action.payload.quotes.USDEUR).toFixed(6)
-      }
-
       const newDataSegment: ICurrency.ModelLocal = {
         date: action.payload.date,
-        quotes: newQuotes,
+        quotes: action.payload.quotes,
         timestamp: action.payload.timestamp
       }
 
@@ -39,23 +42,80 @@ export const currencySlice = createSlice({
     },
     setDataArray: (state: ICurrencyState, action: PayloadAction<ICurrency.ModelLocal[]>) => {
       const data = sortDataByDate(action.payload)
+      const currentDate = data[0].date
+      const currentQuotes = data[0].quotes
 
       return {
         ...state,
-        data
+        data,
+        currentDate,
+        currentQuotes
+      }
+    },
+    setCurrentQuotes: (state: ICurrencyState, action: PayloadAction<{quotes: ICurrency.Quotes, date: string}>) => {
+      const currentQuotes = action.payload.quotes
+      const currentDate = action.payload.date
+
+      return {
+        ...state,
+        currentDate,
+        currentQuotes
+      }
+    },
+    setConvertValues: (state: ICurrencyState, action: PayloadAction<{value: string, currencyName: string}>) => {
+      const currencyName = action.payload.currencyName
+      const value = action.payload.value
+      const quotes = state.currentQuotes
+
+      let convertedValues = null
+
+      if (!quotes) return
+
+      const EURCHF = +(quotes.USDCHF / quotes.USDEUR).toFixed(6)
+
+      switch (currencyName) {
+        case CURRENCY_NAME.USD: {
+          convertedValues = {
+            usdValue: value,
+            eurValue: transformCurrencyValue(+value * quotes.USDEUR),
+            chfValue: transformCurrencyValue(+value * quotes.USDCHF)
+          }
+          break
+        }
+        case CURRENCY_NAME.EUR: {
+          convertedValues = {
+            usdValue: transformCurrencyValue(+value / quotes.USDEUR),
+            eurValue: value,
+            chfValue: transformCurrencyValue(+value * EURCHF)
+          }
+          break
+        }
+        case CURRENCY_NAME.CHF: {
+          convertedValues = {
+            usdValue: transformCurrencyValue(+value / quotes.USDCHF),
+            eurValue: transformCurrencyValue(+value / EURCHF),
+            chfValue: value
+          }
+          break
+        }
+        default: break
+      }
+
+      return {
+        ...state,
+        convertedValues
       }
     }
   },
 });
 
-export const { setDataSegment, setDataArray } = currencySlice.actions;
+export const { setDataSegment, setDataArray, setCurrentQuotes, setConvertValues } = currencySlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
-export const getDataMain = (): AppThunk => async (dispatch, getState) => {
-
+export const getStartData = (): AppThunk => async (dispatch, getState) => {
   const localCurrencyData = localStorage.getItem('localCurrencyData')
   const localCurrencyDataArray = localCurrencyData ? JSON.parse(localCurrencyData) : []
 
@@ -69,7 +129,7 @@ export const getDataMain = (): AppThunk => async (dispatch, getState) => {
     if(!stateData.length || stateData[0].date !== dateToString(date)) {
       try {
         const response = await CurrencyAPI.getCurrencyData(date)
-        await dispatch(setDataSegment(response))
+        dispatch(setDataSegment(response))
       } catch (error) {
         console.log(error)
       }
@@ -78,13 +138,29 @@ export const getDataMain = (): AppThunk => async (dispatch, getState) => {
     }
   }
 
+  dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
+
   localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));
 }
 
-export const getCurrencyData = (date: Date): AppThunk => async dispatch => {
+export const getCurrentData = (date: Date): AppThunk => async (dispatch, getState) => {
+
+  const stateData = getState().currency.data
+
+  for (let i = 0; i < stateData.length; i++) {
+    if (stateData[i].date === dateToString(date)){
+      dispatch(setCurrentQuotes({quotes: stateData[i].quotes, date: dateToString(date)}))
+      dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
+      return
+    }
+  }
+
   try {
     const response = await CurrencyAPI.getCurrencyData(date)
-    await dispatch(setDataSegment(response))
+    dispatch(setDataSegment(response))
+    dispatch(setCurrentQuotes({quotes: response.quotes, date: dateToString(date)}))
+    dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
+    localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));
   } catch (error) {
     console.log(error)
   }
