@@ -9,6 +9,7 @@ import {sortDataToChart} from '../../helpers/sortDataToChart'
 import {ISelectOption} from '../../components/select'
 import {transformChartGroup} from '../../helpers/transformChartGroup'
 import {convertCurrencyValues} from '../../helpers/convertCurrencyValues'
+import {setErrorMessage} from './messagesSlice'
 
 export interface ICurrencyState {
   data: ICurrency.ModelLocal[];
@@ -17,6 +18,7 @@ export interface ICurrencyState {
   convertedValues: ICurrency.ConvertedValues | null,
   chartData: ICurrency.ChartDataSegment[]
   selectedChartGroup: ICurrency.SelectedChartGroup | null
+  isFetching: boolean
 }
 
 const initialState: ICurrencyState = {
@@ -25,7 +27,8 @@ const initialState: ICurrencyState = {
   currentQuotes: null,
   convertedValues: null,
   chartData: [],
-  selectedChartGroup: null
+  selectedChartGroup: null,
+  isFetching: false,
 };
 
 export const currencySlice = createSlice({
@@ -106,6 +109,14 @@ export const currencySlice = createSlice({
         selectedChartGroup
       }
     },
+    setIsFetching: (state: ICurrencyState, action: PayloadAction<boolean>) => {
+      const isFetching = action.payload
+
+      return {
+        ...state,
+        isFetching
+      }
+    },
   },
 });
 
@@ -115,7 +126,8 @@ export const {
   setCurrentQuotes,
   setConvertValues,
   updateChartData,
-  setSelectedChartGroup
+  setSelectedChartGroup,
+  setIsFetching
 } = currencySlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -123,6 +135,8 @@ export const {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched
 export const getStartData = (): AppThunk => async (dispatch, getState) => {
+
+  dispatch(setIsFetching(true))
 
   //get and set data from localstorage (if we have it there)
   const localCurrencyData = localStorage.getItem('localCurrencyData')
@@ -140,8 +154,10 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
     if(!stateData.length || !stateData[i] || stateData[i].date !== dateToString(date)) {
       try {
         const response = await CurrencyAPI.getCurrencyData(date)
-        dispatch(setDataSegment(response))
+        response.success ? dispatch(setDataSegment(response)) : dispatch(setErrorMessage(response.error.info))
       } catch (error) {
+        dispatch(setIsFetching(false))
+        dispatch(setErrorMessage(new Error(error).message))
         console.log(error)
       }
     }
@@ -155,7 +171,9 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
   dispatch(updateChartData())
 
   //set updated data to localstorage
-  localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));
+  localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data))
+
+  dispatch(setIsFetching(false))
 }
 
 export const getCurrentData = (date: Date): AppThunk => async (dispatch, getState) => {
@@ -179,6 +197,7 @@ export const getCurrentData = (date: Date): AppThunk => async (dispatch, getStat
     dispatch(setConvertValues({value: '1', currencyName: CURRENCY_NAME.USD}))
     localStorage.setItem("localCurrencyData", JSON.stringify(getState().currency.data));
   } catch (error) {
+    dispatch(setErrorMessage(new Error(error).message))
     console.log(error)
   }
 }

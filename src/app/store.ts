@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import currencyReducer from '../app/slices/currencySlice';
+import messagesReducer from '../app/slices/messagesSlice';
 
 export const store = configureStore({
   reducer: {
-    currency: currencyReducer
+    currency: currencyReducer,
+    messages: messagesReducer
   },
 });
 

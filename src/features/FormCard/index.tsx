@@ -37,7 +37,8 @@ export function FormCard() {
                 <img src={CalendarImage} alt='calendar'/>
             </div>
             <hr/>
-            {convertedValues && <div className={'inputs-layout'}>
+            {convertedValues &&
+            <div className={'inputs-layout'}>
                 <div className={'input-plus-image'}>
                     <Input
                         id={CURRENCY_NAME.USD}

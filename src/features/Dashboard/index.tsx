@@ -6,23 +6,29 @@ import {FormCard} from '../FormCard'
 import {ChartCard} from '../ChartCard'
 
 export function Dashboard() {
-    const currencyState = useSelector(selectCurrencyState);
+    const currencyState = useSelector(selectCurrencyState)
+    const mainData = currencyState.data
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getStartData())
     }, [])
 
-    console.log('currencyState', currencyState)
-
-    return (
-        <div className={'dashboard-wrapper global-container'}>
-            <h1>Currency Dashboard</h1>
-            <div className={'dashboard-grid'}>
-                {currencyState && currencyState.data.length && <FormCard/>}
-                <ChartCard grid-area={'chart'}/>
+    if (mainData.length) {
+        return (
+            <div className={'dashboard-wrapper global-container'}>
+                <h1>Currency Dashboard</h1>
+                <div className={'dashboard-grid'}>
+                    <FormCard/>
+                    <ChartCard/>
+                </div>
             </div>
-            {/*<Button name={'Get Data'} onClick={() => dispatch(getDataMain())}/>*/}
+        );
+    } else return (
+        <div className={'wrong-view'}>
+            <h1>Oops..!</h1>
+            <br/>
+            <h3>Something went wrong</h3>
         </div>
-    );
+    )
 }

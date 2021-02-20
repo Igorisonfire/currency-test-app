@@ -20,7 +20,7 @@ export function ChartCard() {
 
     return (
         <div className={'chart-card'}>
-            <h2>Chart</h2>
+            <h2>Last 2 weeks</h2>
             {chartData && <ChartComponent data={chartData}/>}
             {selectedChartGroup ?
                 <div className={'select-group'}>
