@@ -159,6 +159,7 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
         dispatch(setIsFetching(false))
         dispatch(setErrorMessage(new Error(error).message))
         console.log(error)
+        break
       }
     }
   }
