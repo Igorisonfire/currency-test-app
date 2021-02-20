@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 import {useSelector} from 'react-redux'
-import {selectCurrencyState} from '../../app/slices/currencySlice'
+import {selectCurrencyState} from '../../reducers/currency/slice'
 import {FormCard} from '../FormCard'
 import {ChartCard} from '../ChartCard'
 

@@ -3,7 +3,7 @@ import './index.scss';
 import {ISelectOption, SelectComponent} from '../../components/select'
 import {CURRENCY_OPTIONS, SELECT_POSITION} from '../../const/currency.const'
 import {useDispatch, useSelector} from 'react-redux'
-import {selectCurrencyState, updateChartData, setSelectedChartGroup} from '../../app/slices/currencySlice'
+import {selectCurrencyState, updateChartData, setSelectedChartGroup} from '../../reducers/currency/slice'
 import {ChartComponent} from '../../components/chart'
 
 export function ChartCard() {

@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import currencyReducer from '../app/slices/currencySlice';
-import messagesReducer from '../app/slices/messagesSlice';
+import currencyReducer from '../reducers/currency/slice';
+import messagesReducer from '../reducers/messages/slice';
 
 export const store = configureStore({
   reducer: {

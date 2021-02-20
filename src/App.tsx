@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import './App.scss';
 import {Dashboard} from './features/Dashboard'
 import {useDispatch, useSelector} from 'react-redux'
-import {getStartData, selectCurrencyState} from './app/slices/currencySlice'
+import {selectCurrencyState} from './reducers/currency/slice'
+import {getStartData} from './reducers/currency/thunk'
 import {PreloaderMain} from './components/preloader-main'
 import {ErrorMessage} from './components/error-message'
 

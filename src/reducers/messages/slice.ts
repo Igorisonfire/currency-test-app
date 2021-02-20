@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {RootState} from '../store';
+import {RootState} from '../../store/store';
 
 export interface IMessagesState {
     errorMessage: string

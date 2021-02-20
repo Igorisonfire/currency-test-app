@@ -1,6 +1,6 @@
 import * as React from 'react';
 import "./index.scss";
-import {selectMessagesState, setErrorMessage} from '../../app/slices/messagesSlice'
+import {selectMessagesState, setErrorMessage} from '../../reducers/messages/slice'
 import {useDispatch, useSelector} from 'react-redux'
 
 interface IProps {

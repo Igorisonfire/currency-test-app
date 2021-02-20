@@ -1,7 +1,8 @@
 import React from 'react';
 import './index.scss';
 import {useDispatch, useSelector} from 'react-redux'
-import {getCurrentData, selectCurrencyState, setConvertValues} from '../../app/slices/currencySlice'
+import {selectCurrencyState, setConvertValues} from '../../reducers/currency/slice'
+import {getCurrentData} from '../../reducers/currency/thunk'
 import {Input} from '../../components/input'
 import {DatePickerComponent} from '../../components/datepicker'
 import {CURRENCY_NAME} from '../../const/currency.const'
