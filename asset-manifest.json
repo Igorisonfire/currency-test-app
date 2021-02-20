@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/currency-test-app/static/css/main.28250f21.chunk.css",
+    "main.js": "/currency-test-app/static/js/main.eeefebc4.chunk.js",
+    "main.js.map": "/currency-test-app/static/js/main.eeefebc4.chunk.js.map",
+    "runtime-main.js": "/currency-test-app/static/js/runtime-main.693e1716.js",
+    "runtime-main.js.map": "/currency-test-app/static/js/runtime-main.693e1716.js.map",
+    "static/css/2.00850458.chunk.css": "/currency-test-app/static/css/2.00850458.chunk.css",
+    "static/js/2.4c212d58.chunk.js": "/currency-test-app/static/js/2.4c212d58.chunk.js",
+    "static/js/2.4c212d58.chunk.js.map": "/currency-test-app/static/js/2.4c212d58.chunk.js.map",
+    "index.html": "/currency-test-app/index.html",
+    "static/css/2.00850458.chunk.css.map": "/currency-test-app/static/css/2.00850458.chunk.css.map",
+    "static/css/main.28250f21.chunk.css.map": "/currency-test-app/static/css/main.28250f21.chunk.css.map",
+    "static/js/2.4c212d58.chunk.js.LICENSE.txt": "/currency-test-app/static/js/2.4c212d58.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/currency-test-app/static/media/Roboto-Regular.03523cf5.ttf",
+    "static/media/calendar.e78d8c05.svg": "/currency-test-app/static/media/calendar.e78d8c05.svg",
+    "static/media/european-union.3f54ee93.svg": "/currency-test-app/static/media/european-union.3f54ee93.svg",
+    "static/media/switzerland.167517f0.svg": "/currency-test-app/static/media/switzerland.167517f0.svg",
+    "static/media/united-states.c29455bd.svg": "/currency-test-app/static/media/united-states.c29455bd.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.693e1716.js",
+    "static/css/2.00850458.chunk.css",
+    "static/js/2.4c212d58.chunk.js",
+    "static/css/main.28250f21.chunk.css",
+    "static/js/main.eeefebc4.chunk.js"
+  ]
+}
