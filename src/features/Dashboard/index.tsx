@@ -2,7 +2,7 @@ import React from 'react';
 import './index.scss';
 import {useSelector} from 'react-redux'
 import {selectCurrencyState} from '../../reducers/currency/slice'
-import {FormCard} from '../FormCard'
+import {ConverterCard} from '../ConverterCard'
 import {ChartCard} from '../ChartCard'
 
 export function Dashboard() {
@@ -14,7 +14,7 @@ export function Dashboard() {
             <div className={'dashboard-wrapper global-container'}>
                 <h1>Currency Dashboard</h1>
                 <div className={'dashboard-grid'}>
-                    <FormCard/>
+                    <ConverterCard/>
                     <ChartCard/>
                 </div>
             </div>

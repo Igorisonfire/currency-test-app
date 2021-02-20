@@ -12,7 +12,7 @@ import SwitzerlandImage from '../../img/switzerland.svg'
 import CalendarImage from '../../img/calendar.svg'
 import {transformOnlyNumber} from '../../helpers/transformOnlyNumber'
 
-export function FormCard() {
+export function ConverterCard() {
     const dispatch = useDispatch()
     const currencyState = useSelector(selectCurrencyState);
     const convertedValues = currencyState.convertedValues
@@ -28,7 +28,7 @@ export function FormCard() {
     }
 
     return (
-        <form className={'form-card'}>
+        <form className={'converter-card'}>
             <h2>Converter</h2>
             <div className={'input-plus-image'}>
                 <DatePickerComponent
