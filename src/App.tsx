@@ -4,7 +4,7 @@ import {Dashboard} from './features/Dashboard'
 import {useSelector} from 'react-redux'
 import {selectCurrencyState} from './app/slices/currencySlice'
 import {PreloaderMain} from './components/preloader-main'
-import {ErrorMessage} from './components/error-nessage'
+import {ErrorMessage} from './components/error-message'
 
 function App() {
     const currencyState = useSelector(selectCurrencyState);
