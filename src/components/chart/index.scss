@@ -1,0 +1,29 @@
+@import "../../styles/colors";
+@import "../../styles/shadows";
+@import "../../styles/transitions";
+
+.chart-component{
+  height: 100%;
+  width: 100%;
+}
+
+.custom-chart-tooltip {
+  padding: 12px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  @include box-shadow(4);
+
+  &>*:not(:last-child){
+    padding-bottom: 6px;
+  }
+
+  .value{
+    font-weight: 500;
+  }
+
+  .date{
+    font-size: 14px;
+  }
+}

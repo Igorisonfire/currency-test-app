@@ -15,4 +15,14 @@
   &>*:not(:last-child){
     margin-bottom: 24px;
   }
+
+  .select-group{
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+
+    &>*{
+      width: calc(50% - 12px);
+    }
+  }
 }

@@ -14,11 +14,14 @@
     display: grid;
     grid-gap: 24px;
 
+    grid-template-columns: 400px 1fr 1fr 1fr;
     grid-template-areas:
       "converter chart chart chart";
 
 
     @media (max-width: 1024px) {
+      grid-template-rows: auto minmax(400px, auto);
+      grid-template-columns: 1fr;
       grid-template-areas:
       "converter"
       "chart";
