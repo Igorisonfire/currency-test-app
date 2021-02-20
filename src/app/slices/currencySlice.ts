@@ -154,7 +154,7 @@ export const getStartData = (): AppThunk => async (dispatch, getState) => {
     if(!stateData.length || !stateData[i] || stateData[i].date !== dateToString(date)) {
       try {
         const response = await CurrencyAPI.getCurrencyData(date)
-        response.success ? dispatch(setDataSegment(response)) : dispatch(setErrorMessage(response.error.info))
+        dispatch(setDataSegment(response))
       } catch (error) {
         dispatch(setIsFetching(false))
         dispatch(setErrorMessage(new Error(error).message))
