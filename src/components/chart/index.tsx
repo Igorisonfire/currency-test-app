@@ -22,8 +22,8 @@ export const ChartComponent = (props: IProps) => {
                         </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="1"/>
-                    <XAxis dataKey="date"/>
-                    <YAxis domain={['dataMin - 0.008', 'dataMax + 0.008']}/>
+                    <XAxis dataKey="date" stroke="#90A4AE"/>
+                    <YAxis domain={['dataMin - 0.008', 'dataMax + 0.008']} stroke="#90A4AE"/>
                     <Tooltip content={<CustomChartTooltip/>} />
                     <Area type="linear" activeDot={{fill: '#FBE9E7', strokeWidth: 1, stroke: '#DD2C00'}}
                           dataKey="value" stroke="#DD2C00" fillOpacity={1} fill="url(#customGradient)"/>

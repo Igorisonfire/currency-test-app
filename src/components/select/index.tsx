@@ -29,6 +29,7 @@ export const SelectComponent = (props: IProps) => {
                 onChange={onChangeSelect}
                 value={value}
                 captureMenuScroll={false}
+                menuPlacement={'auto'}
                 theme={theme => ({
                     ...theme,
                     colors: {
