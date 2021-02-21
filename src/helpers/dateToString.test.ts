@@ -1,6 +1,5 @@
 import {dateToChartText, dateToString} from './dateToString'
 
-
 describe('Date to string helpers', () => {
 
     it('date to YYY-MM-DD format string"', () => {

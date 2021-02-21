@@ -1,6 +1,5 @@
 import {transformCurrencyValue} from './transformCurrencyValue'
 
-
 describe('transformCurrencyValue', () => {
 
     it('alue should be transformed to string with max 3 numbers after point"', () => {
