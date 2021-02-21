@@ -9,7 +9,8 @@ import {
     setDataArray,
     setDataSegment,
     setIsFetching,
-    setSelectedChartGroup, updateChartData
+    setSelectedChartGroup,
+    updateChartData
 } from './slice'
 
 export const getStartData = (): AppThunk => async (dispatch, getState) => {
