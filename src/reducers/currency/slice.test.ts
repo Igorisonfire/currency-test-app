@@ -10,25 +10,13 @@ import {
     setIsFetching
 } from './slice'
 import {dateToString} from '../../helpers/dateToString'
-import ICurrency from '../../models/currency.model'
 import {CURRENCY_NAME, SELECT_POSITION} from '../../const/currency.const'
-
-const segmentDataTest_1: ICurrency.ModelLocal = {
-    date: "2021-01-01",
-    quotes: {USDEUR: 0.821304, USDUSD: 1, USDCHF: 0.890075},
-    timestamp: 1609545599
-}
-
-const segmentDataTest_2: ICurrency.ModelLocal = {
-    date: "2021-01-02",
-    quotes: {USDEUR: 0.824063, USDUSD: 1, USDCHF: 0.890075},
-    timestamp: 1609631999
-}
+import {SEGMENT_DATA_TEST_1, SEGMENT_DATA_TEST_2} from '../../const/testsMock.const'
 
 const initialState: ICurrencyState = {
-    data: [segmentDataTest_1],
+    data: [SEGMENT_DATA_TEST_1],
     currentDate: dateToString(new Date()),
-    currentQuotes: segmentDataTest_1.quotes,
+    currentQuotes: SEGMENT_DATA_TEST_1.quotes,
     convertedValues: null,
     chartData: [],
     selectedChartGroup: {
@@ -47,27 +35,27 @@ const initialState: ICurrencyState = {
 describe('Currency Slice', () => {
 
     it('dataSegment should be added to data array', () => {
-        const result = currencySlice.reducer(initialState, setDataSegment(segmentDataTest_2))
+        const result = currencySlice.reducer(initialState, setDataSegment(SEGMENT_DATA_TEST_2))
 
         const expectResult: ICurrencyState = {
             ...initialState,
-            data: [segmentDataTest_2, segmentDataTest_1],
+            data: [SEGMENT_DATA_TEST_2, SEGMENT_DATA_TEST_1],
         }
 
         expect(result).toStrictEqual(expectResult)
     })
 
     it('arrayData should be sorted and added to `data:`', () => {
-        const result = currencySlice.reducer(initialState, setDataArray([segmentDataTest_1, segmentDataTest_2]))
+        const result = currencySlice.reducer(initialState, setDataArray([SEGMENT_DATA_TEST_1, SEGMENT_DATA_TEST_2]))
 
         const expectResult: ICurrencyState = {
             ...initialState,
             data: [
-                segmentDataTest_2,
-                segmentDataTest_1,
+                SEGMENT_DATA_TEST_2,
+                SEGMENT_DATA_TEST_1,
             ],
-            currentDate: segmentDataTest_2.date,
-            currentQuotes: segmentDataTest_2.quotes
+            currentDate: SEGMENT_DATA_TEST_2.date,
+            currentQuotes: SEGMENT_DATA_TEST_2.quotes
         }
 
         expect(result).toStrictEqual(expectResult)
@@ -75,14 +63,14 @@ describe('Currency Slice', () => {
 
     it('currentQuotes and currentDate should be added to state', () => {
 
-        const teestQuotes = {quotes: segmentDataTest_1.quotes, date: segmentDataTest_1.date}
+        const teestQuotes = {quotes: SEGMENT_DATA_TEST_1.quotes, date: SEGMENT_DATA_TEST_1.date}
 
         const result = currencySlice.reducer(initialState, setCurrentQuotes(teestQuotes))
 
         const expectResult: ICurrencyState = {
             ...initialState,
-            currentDate: segmentDataTest_1.date,
-            currentQuotes: segmentDataTest_1.quotes
+            currentDate: SEGMENT_DATA_TEST_1.date,
+            currentQuotes: SEGMENT_DATA_TEST_1.quotes
         }
 
         expect(result).toStrictEqual(expectResult)
