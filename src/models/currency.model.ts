@@ -1,6 +1,6 @@
 import {ISelectOption} from '../components/select'
 
-namespace ICurrency {
+declare namespace ICurrency {
     export interface ModelApi {
         date: string
         historical: boolean
@@ -10,10 +10,6 @@ namespace ICurrency {
         success: boolean
         terms: string
         timestamp: number
-        error: {
-            code: number
-            info: string
-        }
     }
 
     export interface ModelLocal {

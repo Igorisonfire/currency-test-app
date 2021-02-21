@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk, RootState } from '../../store/store';
+import { RootState } from '../../store/store';
 import ICurrency from '../../models/currency.model'
-import {CurrencyAPI} from '../../api/currency.api'
 import {dateToString} from '../../helpers/dateToString'
 import {sortDataByDate} from '../../helpers/sortDataByDate'
-import {CURRENCY_NAME, CURRENCY_OPTION, SELECT_POSITION} from '../../const/currency.const'
 import {sortDataToChart} from '../../helpers/sortDataToChart'
 import {ISelectOption} from '../../components/select'
 import {transformChartGroup} from '../../helpers/transformChartGroup'
 import {convertCurrencyValues} from '../../helpers/convertCurrencyValues'
-import {setErrorMessage} from '../messages/slice'
 
 export interface ICurrencyState {
   data: ICurrency.ModelLocal[];
@@ -35,7 +32,7 @@ export const currencySlice = createSlice({
   name: 'currency',
   initialState,
   reducers: {
-    setDataSegment: (state: ICurrencyState, action: PayloadAction<ICurrency.ModelApi>) => {
+    setDataSegment: (state: ICurrencyState, action: PayloadAction<ICurrency.ModelApi | ICurrency.ModelLocal>) => {
       const newDataSegment: ICurrency.ModelLocal = {
         date: action.payload.date,
         quotes: action.payload.quotes,

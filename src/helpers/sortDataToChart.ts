@@ -5,8 +5,9 @@ import {dateToChartText} from './dateToString'
 export const sortDataToChart = (data: ICurrency.ModelLocal[], ratesName: string) => {
 
     let chartData: ICurrency.ChartDataSegment[] = []
+    const iterationsCount = data.length < 14 ? data.length : 14
 
-    for (let i = 0; i < 14; i++) {
+    for (let i = 0; i < iterationsCount; i++) {
         switch (ratesName) {
             case CURRENCY_NAME.USD + CURRENCY_NAME.EUR: {
                 const segment: ICurrency.ChartDataSegment = {
