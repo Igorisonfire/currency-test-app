@@ -9,8 +9,6 @@ export function Dashboard() {
     const currencyState = useSelector(selectCurrencyState)
     const mainData = currencyState.data
 
-    console.log(currencyState)
-
     if (mainData.length) {
         return (
             <div className={'dashboard-wrapper global-container'}>
